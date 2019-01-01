@@ -1,9 +1,10 @@
 import React from "react";
 
-function Search(){
+
+function Header(){
   return (
     
   )
 }
 
-export default Search;
+export default Header;
