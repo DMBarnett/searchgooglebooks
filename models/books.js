@@ -5,7 +5,20 @@ const BookSchema = new Schema ({
   title:{
     type: String,
     required: true
+  },
+  author: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String
+  },
+  image: {
+    type: String
+  },
+  link:{
+    type: String
   }
 })
 
-module.export = Book = mongoose.model("item", BookSchema)
+module.export = Book = mongoose.model("Book", BookSchema)
