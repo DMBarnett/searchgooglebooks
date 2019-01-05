@@ -1,12 +1,11 @@
 import React from "react";
-import {Paper, Grid} from "@material-ui/core"
+import {Grid, Jumbotron} from "react-bootstrap";
+
 
 function Search(){
   return(
     <Grid>
-      <Paper>
-        Hello World
-      </Paper>
+      
     </Grid>
   )
 }

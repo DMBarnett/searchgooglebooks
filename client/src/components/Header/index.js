@@ -1,26 +1,24 @@
 import React from "react";
-import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Typography } from "@material-ui/core"
-
-const styles = {
-  root: {
-    flexGrow: 1
-  },
-  grow: {
-    flexGrow: 1
-  }
-}
+import {Navbar, Nav, NavItem} from "react-bootstrap";
 
 function Header(){
   return (
     <div>
-      <AppBar position="static">
-        <Typography varient="h1" color="white">
-          Your Google Books Bookshelf
-        </Typography>
-      </AppBar>
+      <Navbar>
+        <Navbar.Header>
+          Google Books Bookshelf
+        </Navbar.Header>
+        <Nav>
+          <NavItem eventKey={1} href="/">
+          Search
+          </NavItem>
+          <NavItem eventKey={2} href="/library">
+
+          </NavItem>
+        </Nav>
+      </Navbar>
     </div>
   )
 }
 
-export default withStyles(styles)(Header);
+export default Header;
