@@ -1,12 +1,11 @@
 import React from "react";
-import {Grid, Jumbotron} from "react-bootstrap";
+import {Jumbotron} from "reactstrap";
 
-function NoMatch(props){
-  // const {classes} = props;
+function NoMatch(){
   return(
-    <Grid container spacing="40">
-      
-    </Grid>
+    <Jumbotron container spacing="40">
+      Whoops, looks like theres nothing here! Click <span><a href="/">Here</a></span> to get back to your regularily scheduled webpage!
+    </Jumbotron>
   )
 }
 

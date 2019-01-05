@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Row, Col } from "react-bootstrap";
+import { Container, Row, Col } from "reactstrap";
 import API from "../utils/API";
 import List from "../components/List";
 import ListItem from "../components/ListItem";
@@ -21,7 +21,7 @@ class Library extends Component {
 
   render() {
     return (
-      <Grid>
+      <Container>
         <Row>
           {/*This is for the Bookshelf on left of screen*/}
           <Col size="md-6 s-12">
@@ -40,7 +40,7 @@ class Library extends Component {
           {/*This is the section that displays the details for each book */}
         </Row>
         <Row />
-      </Grid>
+      </Container>
     );
   }
 }
