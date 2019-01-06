@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "reactstrap";
 import API from "../utils/API";
-import List from "../components/List";
-import ListItem from "../components/ListItem";
 
 class Library extends Component {
   state = {
@@ -26,13 +24,7 @@ class Library extends Component {
           {/*This is for the Bookshelf on left of screen*/}
           <Col size="md-6 s-12">
             {this.state.books.length ? (
-              <List>
-                {this.books.map(book=>(
-                  <ListItem>
-
-                  </ListItem>
-                ))}
-              </List>
+              console.log(this.state.books)
             ):(
               <h2>There's nothing on your shelf yet!</h2>
             )}

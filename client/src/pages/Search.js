@@ -11,7 +11,7 @@ class Search extends Component{
   }
 
   lookUpBooks(){
-
+    API.getBooks().then(res=>console.log(res)).catch(err=>console.log(err))
   }
 
   typedInput = event =>{
@@ -23,12 +23,14 @@ class Search extends Component{
 
   saveResults= input=>{
     const working = input.map(element => {
+      console.log(element);
       let foo = {
         title: element.volumeInfo.title,
         authors: element.volumeInfo.authors,
         bookImg: element.volumeInfo.imageLinks.smallThumbnail,
         link: element.volumeInfo.previewLink,
-        description: element.volumeInfo.description
+        description: element.volumeInfo.description,
+        id:element.id
       };
       return foo;
     })
@@ -49,7 +51,30 @@ class Search extends Component{
       })
   }
 
-  
+  saveBook = event =>{
+    event.preventDefault();
+    console.log(event.target.id)
+    const foo = event.target.id;
+    let bar;
+    this.state.results.forEach(element => {
+      if(element.id === foo){
+        bar = element
+        return bar;
+      }
+    });
+    
+    const input ={
+      title:bar.title,
+      author: bar.authors[0],
+      description: bar.description,
+      image: bar.bookImg,
+      link:bar.link
+    }
+
+    API.saveBook({input})
+      .then(res=>this.lookUpBooks())
+      .catch(err=>console.log(err));
+  }
 
   render(){
     return(
@@ -60,15 +85,22 @@ class Search extends Component{
               <div className="form-group">
                 <input type="text" className="searchfield" onChange={(e)=>this.typedInput(e)} placeholder="Enter a book name here"></input>
               </div>
-              <button onClick={this.searchGB}>Search</button>
+              <div className="form-group">
+                <button onClick={this.searchGB}>Search</button>
+              </div>
             </form>
           </Col>
         </Row>
-        <Row>
+        <Row >
+          
           {this.state.results.length ?(
-            <ResultList books={this.state.results} />
+            <Col className="results" sm="12" md={{size:6, offset:3}}>
+              <ResultList books={this.state.results} saveBook={this.saveBook}/>
+            </Col>
           ):(
+            <Col className="results" sm="12" md={{size:6, offset:3}}>
             <h3>Enter a book title to retrieve some results.</h3>
+            </Col>
           )}
         </Row>
       </Container>
