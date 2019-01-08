@@ -14,6 +14,6 @@ export default {
   },
 
   saveBook: function(input){
-    return axios.post("/api/books/", input)
+    return axios.post("/api/books", input)
   }
 }

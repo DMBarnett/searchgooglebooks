@@ -12,7 +12,9 @@ class Library extends Component {
   }
 
   loadBooks = () => {
+    console.log("peach");
     API.getBooks().then(res => {
+      console.log(res.data);
       this.setState({ books:res.data})
     });
   };
@@ -25,6 +27,7 @@ class Library extends Component {
           <Col size="md-6 s-12">
             {this.state.books.length ? (
               console.log(this.state.books)
+              
             ):(
               <h2>There's nothing on your shelf yet!</h2>
             )}
