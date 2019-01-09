@@ -17,13 +17,13 @@ app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-const PORT = process.env.port || 5000;
+const PORT = process.env.PORT || 5000;
 
 const dbkey = require("./config/keys").mongoURI;
 
 
 mongoose
-  .connect((process.env.MONGODB_URI || "mongodb://localhost/googlebooks"), { useNewUrlParser: true})
+  .connect((process.env.MONGODB_URI || dbkey), { useNewUrlParser: true})
   .then(()=>`Candygram for Mongo, database running`)
   .catch(err => console.log(err));
 
