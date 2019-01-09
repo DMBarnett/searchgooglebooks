@@ -18,6 +18,10 @@ const BookSchema = new Schema ({
   },
   link:{
     type: String
+  },
+  bookID:{
+    type:String,
+    required: true
   }
 })
 

@@ -10,3 +10,15 @@
 h3{
   margin:20px;
 }
+
+body{
+  background: url("../images/circuit.png");
+  background-position: center;
+}
+
+li {
+  background-color: darkgray;
+  margin:4px;
+  border: 2px solid darkgray;
+  border-radius: 4px;
+}

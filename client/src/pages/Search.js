@@ -11,7 +11,10 @@ class Search extends Component{
   }
 
   lookUpBooks(){
-    API.getBooks().then(res=>console.log(res)).catch(err=>console.log(err))
+    API
+      .getBooks()
+      .then(res=>console.log("Success!"))
+      .catch(err=>console.log(err))
   }
 
   typedInput = event =>{
@@ -23,7 +26,6 @@ class Search extends Component{
 
   saveResults= input=>{
     const working = input.map(element => {
-      console.log(element);
       let foo = {
         title: element.volumeInfo.title,
         authors: element.volumeInfo.authors,
@@ -37,14 +39,12 @@ class Search extends Component{
     this.setState({
       results:working
     });
-    console.log(this.state.results)
   }
 
   searchGB = event =>{
     event.preventDefault();
     const title = this.state.search.replace(/ /g, "+");
     let url= "https://www.googleapis.com/books/v1/volumes?q="+title
-    console.log(url);
     API.googleSearch(url)
       .then(res =>{
         this.saveResults(res.data.items);
@@ -53,7 +53,6 @@ class Search extends Component{
 
   saveBook = event =>{
     event.preventDefault();
-    console.log(event.target.id)
     const foo = event.target.id;
     let bar;
     this.state.results.forEach(element => {
@@ -62,18 +61,27 @@ class Search extends Component{
         return bar;
       }
     });
-    
-    const input ={
-      title:bar.title,
-      author: bar.authors[0],
-      description: bar.description,
-      image: bar.bookImg,
-      link:bar.link
-    }
 
-    API.saveBook({input})
-      .then(res=>this.lookUpBooks())
-      .catch(err=>console.log(err));
+
+    API.getBooks()
+    .then(res =>{
+      let existingIDs = res.data.map(book => book.bookID);
+      if(existingIDs.indexOf(bar.id)===-1){
+        const input ={
+          title:bar.title || "No Title",
+          author: bar.authors?(bar.authors[0]):( "No Author"),
+          description: bar.description,
+          image: bar.bookImg,
+          link:bar.link,
+          bookID:bar.id
+        }
+        API.saveBook({input})
+          .then(res=>this.lookUpBooks())
+          .catch(err=>console.log(err));
+      }else{
+        console.log("Thats already in the Database.")
+      }
+    })
   }
 
   render(){

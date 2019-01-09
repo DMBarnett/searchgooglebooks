@@ -20,9 +20,10 @@ app.get("*", function (req, res) {
 const PORT = process.env.port || 5000;
 
 const dbkey = require("./config/keys").mongoURI;
-console.log(dbkey);
+
+
 mongoose
-  .connect(dbkey, { useNewUrlParser: true})
+  .connect((process.env.MONGODB_URI || "mongodb://localhost/googlebooks"), { useNewUrlParser: true})
   .then(()=>`Candygram for Mongo, database running`)
   .catch(err => console.log(err));
 

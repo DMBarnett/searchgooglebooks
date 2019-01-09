@@ -12,18 +12,18 @@ module.exports = {
       .catch(err => res.json(err));
   },
   create: (req, res) => {
-    console.log(req.body)
     const newBook = new Book({
       title:req.body.input.title,
       author:req.body.input.author,
-      bookImg: req.body.input.image,
+      image: req.body.input.image,
       link: req.body.input.link,
-      description: req.body.input.description
+      description: req.body.input.description,
+      bookID: req.body.input.bookID
     });
-    console.log(newBook);
     newBook.save(err=>{
       console.log(err)
     })
+
   },
   delete: (req, res) => {
     db.Book.findById({ _id: req.params.id })
